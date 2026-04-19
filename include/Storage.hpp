@@ -7,35 +7,22 @@
 
 class Storage {
 private:
-    std::vector<Product> products;   // Динамический массив товаров
+    std::vector<Product> products;
 
 public:
-    Storage();                        // Конструктор
-    ~Storage();                       // Деструктор
+    Storage() = default;
+    ~Storage() = default;
 
-    // Добавление товара. Возвращает false, если товар с таким ID уже есть
-    bool addStorageItem(const Product& product);
-
-    // Удаление товара по ID. Возвращает true при успехе
-    bool removeStorageItem(unsigned int id);
-
-    // Поиск товара по ID. Возвращает указатель на товар или nullptr
+    bool addProduct(const Product& product);
+    bool removeProduct(unsigned int id);
     Product* findProduct(unsigned int id);
-
-    // Изменение цены товара по ID
-    bool changePrice(unsigned int id, double newPrice);
-
-    // Изменение названия товара по ID
-    bool changeName(unsigned int id, const std::string& newName);
-
-    // Изменение количества товара по ID
-    bool changeCount(unsigned int id, unsigned int newCount);
-
-    // Вывод всех товаров на экран. mode зарезервирован для будущего использования
-    void showStorage(int mode = 0) const;
-
-    // Получить константную ссылку на вектор (для безопасного доступа извне)
+    bool updateProduct(unsigned int id, const Product& newData);
     const std::vector<Product>& getAll() const;
+
+    bool saveToFile(const std::string& filename) const;
+    bool loadFromFile(const std::string& filename);
+
+    friend std::ostream& operator<<(std::ostream& os, const Storage& storage);
 };
 
 #endif // STORAGE_HPP
