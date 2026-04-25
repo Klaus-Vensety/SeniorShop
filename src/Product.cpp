@@ -1,5 +1,7 @@
 #include "Product.hpp"
 
+Product::Product() : id(0), name(""), price(0.0), count(0) {}
+
 Product::Product(unsigned int id, const std::string& name, double price, unsigned int count)
     : id(id), name(name), price(price >= 0 ? price : 0.0), count(count) {}
 
@@ -13,13 +15,11 @@ void Product::setName(const std::string& newName) { name = newName; }
 void Product::setPrice(double newPrice) { if (newPrice >= 0) price = newPrice; }
 void Product::setCount(unsigned int newCount) { count = newCount; }
 
-// Оператор вывода: формат "id;name;price;count"
 std::ostream& operator<<(std::ostream& os, const Product& p) {
     os << p.id << ';' << p.name << ';' << p.price << ';' << p.count;
     return os;
 }
 
-// Оператор ввода: читает строку формата "id;name;price;count"
 std::istream& operator>>(std::istream& is, Product& p) {
     unsigned int id, count;
     std::string name;

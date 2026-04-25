@@ -1,7 +1,8 @@
 #include "Storage.hpp"
 #include <fstream>
 #include <algorithm>
-#include <iostream>
+
+Storage::Storage() {}
 
 bool Storage::addProduct(const Product& product) {
     if (findProduct(product.getID()) != nullptr) return false;
@@ -22,17 +23,7 @@ bool Storage::removeProduct(unsigned int id) {
 Product* Storage::findProduct(unsigned int id) {
     auto it = std::find_if(products.begin(), products.end(),
         [id](const Product& p) { return p.getID() == id; });
-    return it != products.end() ? &(*it) : nullptr;
-}
-
-bool Storage::updateProduct(unsigned int id, const Product& newData) {
-    Product* p = findProduct(id);
-    if (p) {
-        *p = newData;
-        p->setID(id);
-        return true;
-    }
-    return false;
+    return (it != products.end()) ? &(*it) : nullptr;
 }
 
 const std::vector<Product>& Storage::getAll() const {
@@ -55,10 +46,4 @@ bool Storage::loadFromFile(const std::string& filename) {
     while (in >> p)
         products.push_back(p);
     return true;
-}
-
-std::ostream& operator<<(std::ostream& os, const Storage& storage) {
-    for (const auto& p : storage.products)
-        os << p << '\n';
-    return os;
 }
