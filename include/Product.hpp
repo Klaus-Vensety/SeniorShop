@@ -12,7 +12,11 @@ private:
     unsigned int count;
 
 public:
-    Product(unsigned int id = 0, const std::string& name = "", double price = 0.0, unsigned int count = 0);
+    // Конструктор по умолчанию
+    Product();
+
+    // Конструктор с параметрами
+    Product(unsigned int id, const std::string& name, double price, unsigned int count);
 
     // Геттеры
     unsigned int getID() const;
@@ -26,9 +30,9 @@ public:
     void setPrice(double newPrice);
     void setCount(unsigned int newCount);
 
-    // Перегрузка операторов для работы с потоками (файлы/консоль)
+    // Операторы для работы с файлами (формат: id;name;price;count)
     friend std::ostream& operator<<(std::ostream& os, const Product& p);
     friend std::istream& operator>>(std::istream& is, Product& p);
 };
 
-#endif // PRODUCT_HPP
+#endif

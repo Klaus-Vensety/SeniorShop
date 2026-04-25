@@ -10,19 +10,25 @@ private:
     std::vector<Product> products;
 
 public:
-    Storage() = default;
-    ~Storage() = default;
+    Storage();
 
+    // Добавить товар (false, если ID уже существует)
     bool addProduct(const Product& product);
+
+    // Удалить товар по ID (true, если удалён)
     bool removeProduct(unsigned int id);
+
+    // Найти товар по ID (nullptr, если не найден)
     Product* findProduct(unsigned int id);
-    bool updateProduct(unsigned int id, const Product& newData);
+
+    // Получить все товары (только для чтения)
     const std::vector<Product>& getAll() const;
 
+    // Сохранить склад в файл (перезаписывает файл)
     bool saveToFile(const std::string& filename) const;
-    bool loadFromFile(const std::string& filename);
 
-    friend std::ostream& operator<<(std::ostream& os, const Storage& storage);
+    // Загрузить склад из файла (заменяет текущие данные)
+    bool loadFromFile(const std::string& filename);
 };
 
-#endif // STORAGE_HPP
+#endif
