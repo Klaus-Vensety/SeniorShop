@@ -41,4 +41,4 @@ void Sale::closeCheck() {
 double Sale::getCash() const { return cash; }
 double Sale::getIncome() const { return income; }
 
-void Sale::setStorage(Storage* st) { storage = st; }
+void Sale::setStorage(Storage* st) { storage = st;}
