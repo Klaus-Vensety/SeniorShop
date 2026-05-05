@@ -12,23 +12,31 @@ private:
 public:
     Storage();
 
-    // Добавить товар (false, если ID уже существует)
+    // ---------- Основные методы ----------
     bool addProduct(const Product& product);
-
-    // Удалить товар по ID (true, если удалён)
     bool removeProduct(unsigned int id);
-
-    // Найти товар по ID (nullptr, если не найден)
     Product* findProduct(unsigned int id);
-
-    // Получить все товары (только для чтения)
     const std::vector<Product>& getAll() const;
-
-    // Сохранить склад в файл (перезаписывает файл)
     bool saveToFile(const std::string& filename) const;
-
-    // Загрузить склад из файла (заменяет текущие данные)
     bool loadFromFile(const std::string& filename);
+
+    // ---------- Методы, совместимые с main.cpp ----------
+    void addStorageItem(const Product& p);      // обёртка над addProduct
+    bool removeStorageItem(unsigned int id);    // обёртка над removeProduct
+    void showStorage() const;                   // вывод склада
+    void changePrice(unsigned int id, double newPrice); // обёртка над setPrice
+
+    // ---------- Методы из UML-диаграммы ----------
+    void CreateStore();
+    void CreateNewStorage();
+    void ShowStore(int mode = 0);
+    void AddStoreItem(const Product& p);
+    void RemoveStoreItem(unsigned int id);
+    void ChangePrice(unsigned int id, double newPrice);
+    void ChangeName(unsigned int id, const std::string& newName);
+    void CheckStorage();
+    void AddNewItem();
+    void DeleteItem(unsigned int id);
 };
 
 #endif

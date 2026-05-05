@@ -6,27 +6,25 @@
 
 class Sale {
 private:
-    Storage* storage;      // невладеющий указатель на склад
-    Check currentCheck;    // текущий чек
-    double cash;           // наличные в кассе
-    double income;         // общая выручка
+    Storage* storage;
+    Check currentCheck;
+    double cash;
+    double income;
 
 public:
-    // Конструктор принимает указатель на склад, обнуляет кассу и доход
     Sale(Storage* st);
 
-    // Продажа товара
     bool sellProduct(unsigned int productId, unsigned int quantity);
-
-    // Закрыть чек (вывести и очистить)
     void closeCheck();
-
-    // Геттеры
     double getCash() const;
     double getIncome() const;
-
-    // Сеттер для смены склада
     void setStorage(Storage* st);
+
+    // Методы из UML-диаграммы
+    void setCash(double c);
+    void Selling();           // будет полноценно реализован
+    void ShowIncome();
+    void StoreReturner();
 };
 
 #endif
